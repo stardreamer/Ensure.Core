@@ -39,7 +39,7 @@ public class TestClass
 }
 ```
 
-Then next piece of code will produce an instance of `EnsureException` with the following exception message: `There is a problem with variable TestVar(Generic description)! Must be positive! Current value -11!`
+In that case next piece of code will produce an instance of `EnsureException` with the following exception message: `There is a problem with variable TestVar(Generic description)! Must be positive! Current value -11!`
 ```csharp
 try
 {
