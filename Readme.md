@@ -2,6 +2,7 @@
 
 This project is inspired by [Ensure.That](https://github.com/danielwertheim/Ensure.That) developed by [Daniel Wertheim](https://github.com/danielwertheim).
 
+It is also available as a nuget package [Ensure.Core](https://www.nuget.org/packages/Ensure.Core/).
 # Examples of usage
 
 This won't throw any exception
