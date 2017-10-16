@@ -3,6 +3,28 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <VersionPrefix>0.0.1</VersionPrefix>
+    <PackageId>Ensure.Core</PackageId>
+    <Product>Ensure.Core</Product>
+    <Authors>ViridRaven</Authors>
+    <Description>This project is inspired by Ensure.That developed by Daniel Wertheim. The purpose of this library is to allow  common validation checks to be easily made.</Description>
+    <Summary>The purpose of this library is to allow common validation checks to be easily made.</Summary>
+    <PackageLicenseUrl>https://github.com/stardreamer/Ensure.Core/blob/master/License.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/stardreamer/Ensure.Core</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/stardreamer/Ensure.Core</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Copyright>Copyright (c) 2017 Asylgareev Arthur</Copyright>
+    <ReleaseNotes>
+    First batch of validation checks were added:
+      IsPositive - checks if the input value is positive
+      IsNegative - checks if the input value is negative
+      IsNonNegative - checks if the input value is non negative
+      IsNonPositive - checks if the input value is non positive
+      IsNotNullOrEmpty - checks if the input string is not null or empty
+      FileExists - ensure that input file exists
+      IsNotNull - ensure that input object is not null
+    </ReleaseNotes>
+    <PackageTags>ensure validation check</PackageTags>
   </PropertyGroup>
 
 </Project>
