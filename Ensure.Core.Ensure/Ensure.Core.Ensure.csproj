@@ -8,13 +8,13 @@
     <Authors>ViridRaven</Authors>
     <Description>This project is inspired by Ensure.That developed by Daniel Wertheim. The purpose of this library is to allow  common validation checks to be easily made.</Description>
     <Summary>The purpose of this library is to allow common validation checks to be easily made.</Summary>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/stardreamer/Ensure.Core/master/Readme.md</PackageLicenseUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/stardreamer/Ensure.Core/master/License.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/stardreamer/Ensure.Core</PackageProjectUrl>
     <RepositoryUrl>https://github.com/stardreamer/Ensure.Core</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Copyright>Copyright (c) 2017 Asylgareev Arthur</Copyright>
-    <ReleaseNotes>https://raw.githubusercontent.com/stardreamer/Ensure.Core/master/ReleaseNotes.md</ReleaseNotes>
+    <PackageReleaseNotes>https://raw.githubusercontent.com/stardreamer/Ensure.Core/master/ReleaseNotes.md</PackageReleaseNotes>
     <PackageTags>ensure validation check</PackageTags>
   </PropertyGroup>
 
