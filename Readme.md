@@ -1,6 +1,6 @@
 # Ensure.Core
 
-This project is inspired by [Ensure.That](https://github.com/danielwertheim/Ensure.That) made by [Daniel Wertheim](https://github.com/danielwertheim).
+This project is inspired by [Ensure.That](https://github.com/danielwertheim/Ensure.That) developed by [Daniel Wertheim](https://github.com/danielwertheim).
 
 # Examples of usage
 
