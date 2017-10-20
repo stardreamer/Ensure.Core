@@ -1,3 +1,7 @@
+# v0.0.2-alpha2
+[Features]
+1. Following validation checks were added:
+    * `SatisfiesCondition` - checks if the input value does satisfy the specified condition
 # v0.0.2-alpha1
 [Features]
 1. The ability to pass custom error messages to ensure checks was added
