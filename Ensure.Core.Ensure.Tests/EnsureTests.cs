@@ -2,6 +2,7 @@ using System;
 using Xunit;
 using Ensure.Core.Ensure;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Ensure.Core.Ensure.Tests
 {
@@ -108,6 +109,23 @@ namespace Ensure.Core.Ensure.Tests
             var ex3 = Assert.Throws<EnsureException>(() => Ensure.IsEmpty(nameof(notEmptyDict), notEmptyDict, "ex3DictTest"));
             Assert.True(ex3.Message.Contains(nameof(notEmptyDict)) && ex3.Message.Contains("ex3DictTest"));
         }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCustomConditionIsNotSatisfied()
+        {
+            var testValue = -11;
+            var ex1 = Assert.Throws<EnsureException>(() => Ensure.SatisfiesCondition(nameof(testValue), testValue, (v) => v > 0, "ex1SatCheck"));
+            Assert.True(ex1.Message.Contains(nameof(testValue)) && ex1.Message.Contains("ex1SatCheck"));
+
+            var testValue2 = 11;
+            var ex2 = Assert.Throws<EnsureException>(() => Ensure.SatisfiesCondition(nameof(testValue2), testValue2, (v) => v < 0, "ex2SatCheck"));
+            Assert.True(ex2.Message.Contains(nameof(testValue2)) && ex2.Message.Contains("ex2SatCheck"));
+
+            var wrongPath = "notexistingpath/notexistingfile";
+            var ex3 = Assert.Throws<EnsureException>(() => Ensure.SatisfiesCondition(nameof(wrongPath), wrongPath, (v) => File.Exists(v), "ex3SatCheck"));
+            Assert.True(ex3.Message.Contains(nameof(wrongPath)) && ex3.Message.Contains("ex3SatCheck"));
+        }
+
 
 
     }
