@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using Ensure.Core.Ensure;
+using System.Collections.Generic;
 
 namespace Ensure.Core.Ensure.Tests
 {
@@ -74,6 +75,38 @@ namespace Ensure.Core.Ensure.Tests
             var wrongPath = "notexistingpath/notexistingfile";
             var ex = Assert.Throws<EnsureException>(() => Ensure.FileExists(nameof(wrongPath),wrongPath));
             Assert.True(ex.Message.Contains(nameof(wrongPath)) && ex.Message.Contains("exist"));
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenEmptyCollectionIsGivenToIsNotEmpty()
+        {
+            var emptyIntCollection = new List<int>();
+            var ex1 = Assert.Throws<EnsureException>(() => Ensure.IsNotEmpty(nameof(emptyIntCollection), emptyIntCollection, "ex1IntTest"));
+            Assert.True(ex1.Message.Contains(nameof(emptyIntCollection)) && ex1.Message.Contains("ex1IntTest"));
+
+            var emptyFloatColletion = new List<float>();
+            var ex2 = Assert.Throws<EnsureException>(() => Ensure.IsNotEmpty(nameof(emptyFloatColletion), emptyFloatColletion, "ex2FloatTest"));
+            Assert.True(ex2.Message.Contains(nameof(emptyFloatColletion)) && ex2.Message.Contains("ex2FloatTest"));
+
+            var emptyDict = new Dictionary<int,int>();
+            var ex3 = Assert.Throws<EnsureException>(() => Ensure.IsNotEmpty(nameof(emptyDict), emptyDict, "ex3DictTest"));
+            Assert.True(ex3.Message.Contains(nameof(emptyDict)) && ex3.Message.Contains("ex3DictTest"));
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenNonEMptyColletionIsGivenToIsEmpty()
+        {
+            var notEmptyIntCollection = new List<int>() { 1 };
+            var ex1 = Assert.Throws<EnsureException>(() => Ensure.IsEmpty(nameof(notEmptyIntCollection), notEmptyIntCollection, "ex1IntTest"));
+            Assert.True(ex1.Message.Contains(nameof(notEmptyIntCollection)) && ex1.Message.Contains("ex1IntTest"));
+
+            var notEmptyFloatColletion = new List<float>() { (float)1.0 };
+            var ex2 = Assert.Throws<EnsureException>(() => Ensure.IsEmpty(nameof(notEmptyFloatColletion), notEmptyFloatColletion, "ex2FloatTest"));
+            Assert.True(ex2.Message.Contains(nameof(notEmptyFloatColletion)) && ex2.Message.Contains("ex2FloatTest"));
+
+            var notEmptyDict = new Dictionary<int,int>() { { 1, 1 } };
+            var ex3 = Assert.Throws<EnsureException>(() => Ensure.IsEmpty(nameof(notEmptyDict), notEmptyDict, "ex3DictTest"));
+            Assert.True(ex3.Message.Contains(nameof(notEmptyDict)) && ex3.Message.Contains("ex3DictTest"));
         }
 
 
