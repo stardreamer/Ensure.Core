@@ -67,4 +67,5 @@ catch(EnsureException e)
 * `FileExists` - ensure that input file exists
 * `IsNotNull` - ensure that input object is not null
 * `IsEmpty` - cheks if the input collection is empty
-* `IsNotEmpty` - checks if the input colletion is not empty 
+* `IsNotEmpty` - checks if the input colletion is not empty
+* `SatisfiesCondition` - checks if the input value does satisfy the specified condition
