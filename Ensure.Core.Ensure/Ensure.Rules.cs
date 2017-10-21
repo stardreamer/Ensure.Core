@@ -85,7 +85,7 @@ namespace Ensure.Core.Ensure
         /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when input file does not exists</exception> 
         public static void FileExists(string valueName, string value, string customMessage = null, Type parentType = null)
         {
-            PerformEnsureCheck(valueName, value, (v) => File.Exists(value), customMessage ?? "File must exist", parentType);
+            PerformEnsureCheck(valueName, value, (v) => System.IO.File.Exists(value), customMessage ?? "File must exist", parentType);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Ensure.Core.Ensure
         /// <param name="collection">Actual value of the variable being checked.</param>
         /// <param name="customMessage">Custom validation ErrorMessage.</param>
         /// <param name="parentType">Type of the class which contains the variable as property.</param>
-        /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when input variable is null</exception> 
+        /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when input collection is empty</exception> 
         public static void IsNotEmpty<T>(string collectionName, IEnumerable<T> collection, string customMessage = null, Type parentType = null)
         {
             PerformEnsureCheck(collectionName, collection, (v) => v.Any(), customMessage ?? "Collection must not be empty", parentType);
@@ -121,7 +121,7 @@ namespace Ensure.Core.Ensure
         /// <param name="collection">Actual value of the variable being checked.</param>
         /// <param name="customMessage">Custom validation ErrorMessage.</param>
         /// <param name="parentType">Type of the class which contains the variable as property.</param>
-        /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when input variable is null</exception> 
+        /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when input colletion is not empty</exception> 
         public static void IsEmpty<T>(string collectionName, IEnumerable<T> collection, string customMessage = null, Type parentType = null)
         {
             PerformEnsureCheck(collectionName, collection, (v) => !v.Any(), customMessage ?? "Collection must be empty", parentType);
@@ -135,10 +135,10 @@ namespace Ensure.Core.Ensure
         /// <param name="condition">Custom condtion to be checked against inputvalue.</param>
         /// <param name="customMessage">Custom validation ErrorMessage.</param>
         /// <param name="parentType">Type of the class which contains the variable as property.</param>
-        /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when input variable is null</exception> 
-        public static void SatisfiesCondition<T>(string valueName, T value, Func<T, bool> condition, string customMessage = null, Type parentType = null)
+        /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when condition is not satisfied </exception> 
+        public static void SatisfiesCondition<T>(string valueName, T value, Func<T, bool> condition, string customMessage = null, Type parentType = null, Exception userException = null)
         {
-            PerformEnsureCheck(valueName, value, condition, customMessage ?? "Condition must be satisfied", parentType);
+            PerformEnsureCheck(valueName, value, condition, customMessage ?? "Condition must be satisfied", parentType, userException);
         }
     }
 }
