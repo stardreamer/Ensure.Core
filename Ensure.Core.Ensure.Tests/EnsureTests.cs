@@ -8,42 +8,186 @@ namespace Ensure.Core.Ensure.Tests
 {
     public class EnsureTests
     {
+        public static IEnumerable<object[]> GetObjects
+        {
+            get
+            {
+                return new[] 
+                {
+                    new object[] { new List<int>()},
+                    new object[] {15},
+                    new object[] {new object()},
+                    new object[] {new Dictionary<double,double>()}
+                };
+            }
+        }
+
+        public static IEnumerable<object[]> GetEmptyCollections
+        {
+            get
+            {
+                return new[] 
+                {
+                    new object[] { new List<int>()},
+                    new object[] {new List<float>()},
+                    new object[] {new List<string>()},
+                    new object[] {new object[] {}}
+                };
+            }
+        }
+
+        public static IEnumerable<object[]> GetNotEmptyCollections
+        {
+            get
+            {
+                return new[] 
+                {
+                    new object[] { new List<int>() {12} },
+                    new object[] { new List<float>() {(float)23.5} },
+                    new object[] { new List<string>() {"12"} },
+                    new object[] { new object[] {"12"} }
+                };
+            }
+        }
+
+        public static IEnumerable<object[]> GetCustomFailedChecks
+        {
+            get
+            {
+                return new[] 
+                {
+                    new object[] { (Func<double, bool>)((v) => v>0), -1},
+                    new object[] { (Func<double, bool>)((v) => v>0), 0},
+                    new object[] { (Func<string, bool>)((v) => !string.IsNullOrEmpty(v)), (string) null},
+                    new object[] { (Func<string, bool>)((v) => !string.IsNullOrEmpty(v)), ""}
+                };
+            }
+        }
+        public static IEnumerable<object[]> GetCustomPassedChecks
+        {
+            get
+            {
+                return new[] 
+                {
+                    new object[] { (Func<double, bool>)((v) => v>0), 10},
+                    new object[] { (Func<double, bool>)((v) => v>0), 10.53},
+                    new object[] { (Func<string, bool>)((v) => !string.IsNullOrEmpty(v)), "12"},
+                    new object[] { (Func<string, bool>)((v) => !string.IsNullOrEmpty(v)), "   "}
+                };
+            }
+        }
+
         [Fact]
         public void ShouldAlwaysWork()
         {
             Assert.True(true);
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenWrongValueWasPassedToIsPositive()
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2.23)]
+        [InlineData(0.5)]
+        [InlineData(1e-5)]
+        [InlineData((float)15.45)]
+        public void ShouldWorkWhenGoodValueIsPassedToIsPositive(double value)
         {
-            var testValue = -11;
+            var ex = Record.Exception(() => Ensure.IsPositive(nameof(value),value));
+            Assert.Null(ex);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        [InlineData(-0.5)]
+        [InlineData(-1e-5)]
+        [InlineData((float)-15.45)]
+        public void ShouldThrowExceptionWhenWrongValueWasPassedToIsPositive(double testValue)
+        {
             var ex = Assert.Throws<EnsureException>(() => Ensure.IsPositive(nameof(testValue),testValue));
             Assert.True(ex.Message.Contains(nameof(testValue)) && ex.Message.Contains("positive"));
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenWrongValueWasPassedToIsNonNegative()
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(2.23)]
+        [InlineData(0.5)]
+        [InlineData(1e-5)]
+        [InlineData((float)15.45)]
+        public void ShouldWorkWhenGoodValueIsPassedToIsNonNegative(double testValue)
         {
-            var testValue = -11;
+            var ex = Record.Exception(() => Ensure.IsNonNegative(nameof(testValue),testValue));
+            Assert.Null(ex);
+        }
+
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(-2.23)]
+        [InlineData(-0.5)]
+        [InlineData(-1e-5)]
+        [InlineData((float)-15.45)]
+        public void ShouldThrowExceptionWhenWrongValueWasPassedToIsNonNegative(double testValue)
+        {
             var ex = Assert.Throws<EnsureException>(() => Ensure.IsNonNegative(nameof(testValue),testValue));
             Assert.True(ex.Message.Contains(nameof(testValue)) && ex.Message.Contains("nonnegative"));
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenWrongValueWasPassedToIsNegative()
+        [Theory]
+        [InlineData(-1)]
+        [InlineData(-2.23)]
+        [InlineData(-0.5)]
+        [InlineData(-1e-5)]
+        [InlineData((float)-15.45)]
+        public void ShouldWorkWhenGoodValueIsPassedToIsNegative(double testValue)
         {
-            var testValue = 11;
+            var ex = Record.Exception(() => Ensure.IsNegative(nameof(testValue),testValue));
+            Assert.Null(ex);
+        }
+
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2.23)]
+        [InlineData(0.5)]
+        [InlineData(1e-5)]
+        [InlineData((float)15.45)]
+        public void ShouldThrowExceptionWhenWrongValueWasPassedToIsNegative(double testValue)
+        {
             var ex = Assert.Throws<EnsureException>(() => Ensure.IsNegative(nameof(testValue),testValue));
             Assert.True(ex.Message.Contains(nameof(testValue)) && ex.Message.Contains("negative"));
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenWrongValueWasPassedToIsNonPositive()
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-1)]
+        [InlineData(-2.23)]
+        [InlineData(-0.5)]
+        [InlineData(-1e-5)]
+        [InlineData((float)-15.45)]
+        public void ShouldWorkWhenGoodValueIsPassedToIsNonPositive(double testValue)
         {
-            var testValue = 11;
+            var ex = Record.Exception(() => Ensure.IsNonPositive(nameof(testValue), testValue));
+            Assert.Null(ex);
+        }
+
+        [Theory]
+        [InlineData(1)]
+        [InlineData(2.23)]
+        [InlineData(0.5)]
+        [InlineData(1e-5)]
+        [InlineData((float)15.45)]
+        public void ShouldThrowExceptionWhenWrongValueWasPassedToIsNonPositive(double testValue)
+        {
             var ex = Assert.Throws<EnsureException>(() => Ensure.IsNonPositive(nameof(testValue),testValue));
             Assert.True(ex.Message.Contains(nameof(testValue)) && ex.Message.Contains("nonpositive"));
+        }
+
+        [Theory]
+        [MemberData("GetObjects")]
+        public void ShouldWorkWhenGoodValueIsPassedToIsNotNull(object testValue)
+        {
+            var ex = Record.Exception(() => Ensure.IsNotNull(nameof(testValue), testValue));
+            Assert.Null(ex);
         }
 
         [Fact]
@@ -54,79 +198,74 @@ namespace Ensure.Core.Ensure.Tests
             Assert.True(ex.Message.Contains(nameof(testValue)) && ex.Message.Contains("null"));
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenNullStringIsPassedToIsNotNullOrEmpty()
+        [Theory]
+        [InlineData("12")]
+        [InlineData("   ")]
+        public void ShouldWorkWhenGoodValueIsPassedToIsNotNullOrEmpty(string testValue)
         {
-            string testValue = null;
-            var ex = Assert.Throws<EnsureException>(() => Ensure.IsNotNullOrEmpty(nameof(testValue),testValue));
-            Assert.True(ex.Message.Contains(nameof(testValue)) && ex.Message.Contains("null"));
+            var ex = Record.Exception(() => Ensure.IsNotNullOrEmpty(nameof(testValue), testValue));
+            Assert.Null(ex);
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenEmptyStringIsPassedToIsNotNullOrEmpty()
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public void ShouldThrowExceptionWhenNullStringIsPassedToIsNotNullOrEmpty(string testValue)
         {
-            string testValue = "";
             var ex = Assert.Throws<EnsureException>(() => Ensure.IsNotNullOrEmpty(nameof(testValue),testValue));
-            Assert.True(ex.Message.Contains(nameof(testValue)) && ex.Message.Contains("empty"));
+            Assert.True(ex.Message.Contains(nameof(testValue)) && (ex.Message.Contains("null") || ex.Message.Contains("empty")));
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenNotExistingFileWasPassedToFileExists()
+        [Theory]
+        [InlineData("notexistingpath/notexistingfile")]
+        [InlineData("")]
+        [InlineData("12")]
+        [InlineData(null)]
+        public void ShouldThrowExceptionWhenNotExistingFileWasPassedToFileExists(string wrongPath)
         {
-            var wrongPath = "notexistingpath/notexistingfile";
             var ex = Assert.Throws<EnsureException>(() => Ensure.FileExists(nameof(wrongPath),wrongPath));
             Assert.True(ex.Message.Contains(nameof(wrongPath)) && ex.Message.Contains("exist"));
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenEmptyCollectionIsGivenToIsNotEmpty()
+
+        [Theory]
+        [MemberData("GetNotEmptyCollections")]
+        public void ShouldWorkWhenNonEmptyCollectionIsGivenToIsNotEmpty<T>(IEnumerable<T> nonEmptyCollection)
         {
-            var emptyIntCollection = new List<int>();
-            var ex1 = Assert.Throws<EnsureException>(() => Ensure.IsNotEmpty(nameof(emptyIntCollection), emptyIntCollection, "ex1IntTest"));
-            Assert.True(ex1.Message.Contains(nameof(emptyIntCollection)) && ex1.Message.Contains("ex1IntTest"));
-
-            var emptyFloatColletion = new List<float>();
-            var ex2 = Assert.Throws<EnsureException>(() => Ensure.IsNotEmpty(nameof(emptyFloatColletion), emptyFloatColletion, "ex2FloatTest"));
-            Assert.True(ex2.Message.Contains(nameof(emptyFloatColletion)) && ex2.Message.Contains("ex2FloatTest"));
-
-            var emptyDict = new Dictionary<int,int>();
-            var ex3 = Assert.Throws<EnsureException>(() => Ensure.IsNotEmpty(nameof(emptyDict), emptyDict, "ex3DictTest"));
-            Assert.True(ex3.Message.Contains(nameof(emptyDict)) && ex3.Message.Contains("ex3DictTest"));
+            var ex = Record.Exception(() => Ensure.IsNotEmpty(nameof(nonEmptyCollection), nonEmptyCollection));
+            Assert.Null(ex);
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenNonEMptyColletionIsGivenToIsEmpty()
+        [Theory]
+        [MemberData("GetEmptyCollections")]
+        public void ShouldThrowExceptionWhenEmptyCollectionIsGivenToIsNotEmpty<T>(IEnumerable<T> emptyCollection)
         {
-            var notEmptyIntCollection = new List<int>() { 1 };
-            var ex1 = Assert.Throws<EnsureException>(() => Ensure.IsEmpty(nameof(notEmptyIntCollection), notEmptyIntCollection, "ex1IntTest"));
-            Assert.True(ex1.Message.Contains(nameof(notEmptyIntCollection)) && ex1.Message.Contains("ex1IntTest"));
-
-            var notEmptyFloatColletion = new List<float>() { (float)1.0 };
-            var ex2 = Assert.Throws<EnsureException>(() => Ensure.IsEmpty(nameof(notEmptyFloatColletion), notEmptyFloatColletion, "ex2FloatTest"));
-            Assert.True(ex2.Message.Contains(nameof(notEmptyFloatColletion)) && ex2.Message.Contains("ex2FloatTest"));
-
-            var notEmptyDict = new Dictionary<int,int>() { { 1, 1 } };
-            var ex3 = Assert.Throws<EnsureException>(() => Ensure.IsEmpty(nameof(notEmptyDict), notEmptyDict, "ex3DictTest"));
-            Assert.True(ex3.Message.Contains(nameof(notEmptyDict)) && ex3.Message.Contains("ex3DictTest"));
+            var ex = Assert.Throws<EnsureException>(() => Ensure.IsNotEmpty<T>(nameof(emptyCollection),emptyCollection));
+            Assert.True(ex.Message.Contains(nameof(emptyCollection)) && ex.Message.Contains("empty"));
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenCustomConditionIsNotSatisfied()
+        [Theory]
+        [MemberData("GetNotEmptyCollections")]
+        public void ShouldThrowExceptionWhenNonEmptyColletionIsGivenToIsEmpty<T>(IEnumerable<T> nonEmptyCollectio)
         {
-            var testValue = -11;
-            var ex1 = Assert.Throws<EnsureException>(() => Ensure.SatisfiesCondition(nameof(testValue), testValue, (v) => v > 0, "ex1SatCheck"));
-            Assert.True(ex1.Message.Contains(nameof(testValue)) && ex1.Message.Contains("ex1SatCheck"));
-
-            var testValue2 = 11;
-            var ex2 = Assert.Throws<EnsureException>(() => Ensure.SatisfiesCondition(nameof(testValue2), testValue2, (v) => v < 0, "ex2SatCheck"));
-            Assert.True(ex2.Message.Contains(nameof(testValue2)) && ex2.Message.Contains("ex2SatCheck"));
-
-            var wrongPath = "notexistingpath/notexistingfile";
-            var ex3 = Assert.Throws<EnsureException>(() => Ensure.SatisfiesCondition(nameof(wrongPath), wrongPath, (v) => File.Exists(v), "ex3SatCheck"));
-            Assert.True(ex3.Message.Contains(nameof(wrongPath)) && ex3.Message.Contains("ex3SatCheck"));
+            var ex = Assert.Throws<EnsureException>(() => Ensure.IsEmpty(nameof(nonEmptyCollectio),nonEmptyCollectio));
+            Assert.True(ex.Message.Contains(nameof(nonEmptyCollectio)) && ex.Message.Contains("empty"));
         }
 
+        [Theory]
+        [MemberData("GetCustomPassedChecks")]
+        public void ShouldTWorkWhenCustomConditionIsSatisfied<T>(Func<T, bool> condition, T value)
+        {
+            var ex = Record.Exception(() => Ensure.SatisfiesCondition(nameof(value), value, condition, "exSatCheck"));
+            Assert.Null(ex);
+        }
 
-
+        [Theory]
+        [MemberData("GetCustomFailedChecks")]
+        public void ShouldThrowExceptionWhenCustomConditionIsNotSatisfied<T>(Func<T, bool> condition, T value)
+        {
+            var ex1 = Assert.Throws<EnsureException>(() => Ensure.SatisfiesCondition(nameof(value), value, condition, "exSatCheck"));
+            Assert.True(ex1.Message.Contains(nameof(value)) && ex1.Message.Contains("exSatCheck"));
+        }
     }
 }
