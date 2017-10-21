@@ -59,7 +59,7 @@ namespace Ensure.Core.Ensure
         /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when value is positive</exception> 
         public static void IsNonPositive(string valueName, double value, string customMessage = null, Type parentType = null)
         {
-            PerformEnsureCheck(valueName, value, (v) => v < 0, customMessage ?? "Must be nonpositive", parentType);
+            PerformEnsureCheck(valueName, value, (v) => v <= 0, customMessage ?? "Must be nonpositive", parentType);
         }
 
         /// <summary>

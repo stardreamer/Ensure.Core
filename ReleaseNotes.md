@@ -1,3 +1,9 @@
+# v0.0.2-alpha3
+[Fix]
+1. Fixed wrong condition for IsNonPositive check. Zero value was not passing old check
+
+[Misc]
+1. More test examples were added
 # v0.0.2-alpha2
 [Features]
 1. Following validation checks were added:
