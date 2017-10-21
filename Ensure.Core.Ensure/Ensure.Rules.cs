@@ -136,9 +136,9 @@ namespace Ensure.Core.Ensure
         /// <param name="customMessage">Custom validation ErrorMessage.</param>
         /// <param name="parentType">Type of the class which contains the variable as property.</param>
         /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when condition is not satisfied </exception> 
-        public static void SatisfiesCondition<T>(string valueName, T value, Func<T, bool> condition, string customMessage = null, Type parentType = null)
+        public static void SatisfiesCondition<T>(string valueName, T value, Func<T, bool> condition, string customMessage = null, Type parentType = null, Exception userException = null)
         {
-            PerformEnsureCheck(valueName, value, condition, customMessage ?? "Condition must be satisfied", parentType);
+            PerformEnsureCheck(valueName, value, condition, customMessage ?? "Condition must be satisfied", parentType, userException);
         }
     }
 }
