@@ -1,5 +1,10 @@
+# v0.0.3
+[Feature]
+1. Directory checks were added
+[Bugfix]
+1. Multiple enumeration of IEnumerable were fixed
 # v0.0.2
-[Features]
+ [Features]
 1. Contexts for ensure checks were added [Issue 11](https://github.com/stardreamer/Ensure.Core/issues/11)
 1. Checks for collections were added in their own context [Issue 1](https://github.com/stardreamer/Ensure.Core/issues/1)
 1. Checks for the emptiness of the files were added in File context [Issue 2](https://github.com/stardreamer/Ensure.Core/issues/2)

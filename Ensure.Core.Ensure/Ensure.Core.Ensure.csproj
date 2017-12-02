@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <VersionPrefix>0.0.2</VersionPrefix>
+    <VersionPrefix>0.0.3</VersionPrefix>
     <PackageId>Ensure.Core</PackageId>
     <Product>Ensure.Core</Product>
     <Authors>ViridRaven</Authors>
@@ -14,6 +14,6 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Copyright>Copyright (c) 2017 Asylgareev Arthur</Copyright>
     <PackageReleaseNotes>https://raw.githubusercontent.com/stardreamer/Ensure.Core/master/ReleaseNotes.md</PackageReleaseNotes>
-    <PackageTags>ensure validation check</PackageTags>
+    <PackageTags>ensure validation check file directory</PackageTags>
   </PropertyGroup>
 </Project>

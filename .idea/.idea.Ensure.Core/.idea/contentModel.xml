@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/.Rider2017.2/system/resharper-host/local/Transient/ReSharperHost/v10/SolutionCaches/_Ensure.Core.1578744779.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.3.0/build/netcoreapp1.0/xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.3.0/build/netcoreapp1.0/xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.3.0/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="Ensure.Core.Ensure" t="IncludeRecursive">
+        <e p="Ensure.Collection.Rules.cs" t="Include" />
+        <e p="Ensure.Core.Ensure.csproj" t="IncludeRecursive" />
+        <e p="Ensure.Directory.Rules.cs" t="Include" />
+        <e p="Ensure.File.Rules.cs" t="Include" />
+        <e p="Ensure.Number.Rules.cs" t="Include" />
+        <e p="Ensure.Numbers.Rules.cs" t="Include" />
+        <e p="Ensure.Rules.cs" t="Include" />
+        <e p="Ensure.String.Rules.cs" t="Include" />
+        <e p="Ensure.Utils.cs" t="Include" />
+        <e p="EnsureException.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Ensure.Core.Ensure.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Ensure.Core.Ensure.Tests" t="IncludeRecursive">
+        <e p="EmptyDirectory" t="Include" />
+        <e p="Ensure.Collection.Tests.cs" t="Include" />
+        <e p="Ensure.Core.Ensure.Tests.csproj" t="IncludeRecursive" />
+        <e p="Ensure.Directory.Tests.cs" t="Include" />
+        <e p="Ensure.File.Tests.cs" t="Include" />
+        <e p="Ensure.Number.Tests.cs" t="Include" />
+        <e p="Ensure.Numbers.Tests.cs" t="Include" />
+        <e p="Ensure.String.Tests.cs" t="Include" />
+        <e p="EnsureTests.cs" t="Include" />
+        <e p="TestResults" t="Include">
+          <e p="results" t="Include">
+            <e p="unit_tests.xml" t="Include" />
+          </e>
+          <e p="unit_tests.xml" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="files" t="Include">
+          <e p="emptyfile.txt" t="Include" />
+          <e p="filewithblanklines.txt" t="Include" />
+          <e p="filewithoutblanklines.txt" t="Include" />
+          <e p="nonemptyfile.txt" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp2.0" t="Include">
+              <e p="Ensure.Core.Ensure.Tests.AssemblyInfo.cs" t="Include" />
+              <e p="Ensure.Core.Ensure.Tests.Program.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="result.xml" t="Include" />
+      </e>
+      <e p="Ensure.Core.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
