@@ -22,7 +22,7 @@ namespace Ensure.Core.Ensure
             /// <param name="value">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when value is nonpositive</exception> 
+            /// <exception cref="EnsureException">Thrown when value is nonpositive</exception> 
             public static void IsPositive(string valueName, double value, string customMessage = null, Type parentType = null)
             {
                 PerformEnsureCheck(valueName, value, (v) => v > 0, customMessage ?? "Must be positive", parentType);
@@ -35,7 +35,7 @@ namespace Ensure.Core.Ensure
             /// <param name="value">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when value is nonnegative</exception> 
+            /// <exception cref="EnsureException">Thrown when value is nonnegative</exception> 
             public static void IsNegative(string valueName, double value, string customMessage = null, Type parentType = null)
             {
                 PerformEnsureCheck(valueName, value, (v) => v < 0, customMessage ?? "Must be negative", parentType);
@@ -48,7 +48,7 @@ namespace Ensure.Core.Ensure
             /// <param name="value">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when value is negative</exception> 
+            /// <exception cref="EnsureException">Thrown when value is negative</exception> 
             public static void IsNonNegative(string valueName, double value, string customMessage = null, Type parentType = null)
             {
                 PerformEnsureCheck(valueName, value, (v) => v >= 0, customMessage ?? "Must be nonnegative", parentType);
@@ -61,7 +61,7 @@ namespace Ensure.Core.Ensure
             /// <param name="value">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when value is positive</exception> 
+            /// <exception cref="EnsureException">Thrown when value is positive</exception> 
             public static void IsNonPositive(string valueName, double value, string customMessage = null, Type parentType = null)
             {
                 PerformEnsureCheck(valueName, value, (v) => v <= 0, customMessage ?? "Must be nonpositive", parentType);
@@ -74,7 +74,7 @@ namespace Ensure.Core.Ensure
             /// <param name="value">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when value is not odd</exception> 
+            /// <exception cref="EnsureException">Thrown when value is not odd</exception> 
             public static void IsOdd(string valueName, int value, string customMessage = null, Type parentType = null)
             {
                 PerformEnsureCheck(valueName, value, (v) => v %2 != 0, customMessage ?? "Must be odd", parentType);
@@ -87,7 +87,7 @@ namespace Ensure.Core.Ensure
             /// <param name="value">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when value is not even</exception> 
+            /// <exception cref="EnsureException">Thrown when value is not even</exception> 
             public static void IsEven(string valueName, int value, string customMessage = null, Type parentType = null)
             {
                 PerformEnsureCheck(valueName, value, (v) => v %2 == 0, customMessage ?? "Must be even", parentType);

@@ -22,7 +22,7 @@ namespace Ensure.Core.Ensure
             /// <param name="value">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown if not all values are positive</exception> 
+            /// <exception cref="EnsureException">Thrown if not all values are positive</exception> 
             public static void ArePositive(string valueName, IEnumerable<double> values, string customMessage = null, Type parentType = null) 
             {
                 foreach (var value in values)
@@ -38,7 +38,7 @@ namespace Ensure.Core.Ensure
             /// <param name="value">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown if not all values are negative</exception> 
+            /// <exception cref="EnsureException">Thrown if not all values are negative</exception> 
             public static void AreNegative(string valueName, IEnumerable<double>  values, string customMessage = null, Type parentType = null) 
             {
                 foreach (var value in values)
@@ -54,7 +54,7 @@ namespace Ensure.Core.Ensure
             /// <param name="value">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown if not all values are nonnegative<</exception> 
+            /// <exception cref="EnsureException">Thrown if not all values are nonnegative</exception> 
             public static void AreNonNegative(string valueName, IEnumerable<double>  values, string customMessage = null, Type parentType = null) 
             {
                 foreach (var value in values)
@@ -70,7 +70,7 @@ namespace Ensure.Core.Ensure
             /// <param name="value">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown if not all values are nonpositive</exception> 
+            /// <exception cref="EnsureException">Thrown if not all values are nonpositive</exception> 
             public static void AreNonPositive(string valueName, IEnumerable<double>  values, string customMessage = null, Type parentType = null) 
             {
                 foreach (var value in values)
@@ -86,7 +86,7 @@ namespace Ensure.Core.Ensure
             /// <param name="value">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown if not all values are odd</exception> 
+            /// <exception cref="EnsureException">Thrown if not all values are odd</exception> 
             public static void AreOdd(string valueName, IEnumerable<int> values, string customMessage = null, Type parentType = null)
             {
                 foreach (var value in values)
@@ -102,7 +102,7 @@ namespace Ensure.Core.Ensure
             /// <param name="value">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown if not all values are even</exception> 
+            /// <exception cref="EnsureException">Thrown if not all values are even</exception> 
             public static void AreEven(string valueName, IEnumerable<int> values, string customMessage = null, Type parentType = null)
             {
                 foreach (var value in values)
