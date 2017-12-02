@@ -1,5 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <VersionPrefix>0.0.2</VersionPrefix>
@@ -17,5 +16,4 @@
     <PackageReleaseNotes>https://raw.githubusercontent.com/stardreamer/Ensure.Core/master/ReleaseNotes.md</PackageReleaseNotes>
     <PackageTags>ensure validation check</PackageTags>
   </PropertyGroup>
-
 </Project>
