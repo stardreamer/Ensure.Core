@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace Ensure.Core.Ensure
@@ -22,7 +21,7 @@ namespace Ensure.Core.Ensure
             /// <param name="collection">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when input collection is empty</exception> 
+            /// <exception cref="EnsureException">Thrown when input collection is empty</exception> 
             public static void IsNotEmpty<T>(string collectionName, IEnumerable<T> collection, string customMessage = null, Type parentType = null)
             {
                 PerformEnsureCheck(collectionName, collection, (v) => v.Any(), customMessage ?? "Collection must not be empty", parentType);
@@ -35,7 +34,7 @@ namespace Ensure.Core.Ensure
             /// <param name="collection">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when input colletion is not empty</exception> 
+            /// <exception cref="EnsureException">Thrown when input colletion is not empty</exception> 
             public static void IsEmpty<T>(string collectionName, IEnumerable<T> collection, string customMessage = null, Type parentType = null)
             {
                 PerformEnsureCheck(collectionName, collection, (v) => !v.Any(), customMessage ?? "Collection must be empty", parentType);
@@ -48,12 +47,13 @@ namespace Ensure.Core.Ensure
             /// <param name="collection">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when input colletion's elements are not unique </exception> 
+            /// <exception cref="EnsureException">Thrown when input colletion's elements are not unique </exception> 
             public static void Uniqueness<T>(string collectionName, IEnumerable<T> collection, string customMessage = null, Type parentType = null)
             {
-                PerformEnsureCheck(collectionName, collection, (v) =>  
+                var value = collection as IList<T> ?? collection.ToList();
+                PerformEnsureCheck(collectionName, value, (v) =>  
                     {
-                        var enumerable = collection as IList<T> ?? collection.ToList();
+                        var enumerable = collection as IList<T> ?? value.ToList();
                         var totalRepeatNumber = enumerable.Count - enumerable.Distinct().Count();
                         return totalRepeatNumber == 0;
                     },
@@ -67,12 +67,13 @@ namespace Ensure.Core.Ensure
             /// <param name="collection">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when dependentEnumerable contains elements that are not present in independentEnumerable</exception> 
+            /// <exception cref="EnsureException">Thrown when dependentEnumerable contains elements that are not present in independentEnumerable</exception> 
             public static void Coherence<T>(string dependentparameterName, IEnumerable<T> dependentEnumerable, string independentparameterName,
                 IEnumerable<T> independentEnumerable)
             {
-                PerformEnsureCheck(dependentparameterName, dependentEnumerable,
-                (v) => !dependentEnumerable.Any(value => !independentEnumerable.Contains(value)),
+                var enumerable = dependentEnumerable as IList<T> ?? dependentEnumerable.ToList();
+                PerformEnsureCheck(dependentparameterName, enumerable,
+                (v) => enumerable.All(independentEnumerable.Contains),
                 $"Collection {dependentparameterName} contains elements that are not present in {independentparameterName}");
             }
 
@@ -83,7 +84,7 @@ namespace Ensure.Core.Ensure
             /// <param name="collection">Actual value of the variable being checked.</param>
             /// <param name="customMessage">Custom validation ErrorMessage.</param>
             /// <param name="parentType">Type of the class which contains the variable as property.</param>
-            /// <exception cref="TextGameFramework.Ensure.EnsureException">Thrown when the input colletion does not contain specified element</exception> 
+            /// <exception cref="EnsureException">Thrown when the input colletion does not contain specified element</exception> 
             public static void Contains<T>(string collectionName, IEnumerable<T> collection, string valueName, T value, Type parentType = null)
             {
                 PerformEnsureCheck(collectionName, collection, (v) => v.Contains(value), $"Collection must contain element {value}", parentType);
